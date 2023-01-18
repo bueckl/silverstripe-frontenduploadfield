@@ -143,8 +143,11 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
 			config['thumbnailWidth'] = thumbnailWidth;
   			config['thumbnailHeight'] = thumbnailHeight;
 			config['clickable'] = '#' + name + '-dropzone .droparea a';
-			config['renameFilename'] = function (filename) {
-        		return token + '-' + filename;
+			// config['renameFilename'] = function (filename) {
+        	// 	return token + '-' + filename;
+    		// };
+            config['renameFilename'] = function (filename) {
+        		return filename;
     		};
 			config['success'] = function(file, response){
                 addFileFieldID(response[0].id);
