@@ -217,7 +217,7 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
             
             function removeFile(file, dropzoneObject){
                 // Create the remove button
-                var removeButton = Dropzone.createElement('<button class=\"btn btn-primary btn-remove\">Remove</button>');
+                var removeButton = Dropzone.createElement('<button style=\"font-size: 10px; margin: 0 auto; display: block; width: auto; right: 1rem; left: 1rem; margin-bottom: 2rem; \" class=\"btn btn-danger  btn-remove text-center btn-sm\">Löschen</button>');
                 var _this = dropzoneObject;
 
                 // Listen to the click event
