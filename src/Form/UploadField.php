@@ -113,6 +113,8 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
         (function($) {
 			Dropzone.autoDiscover = false;
 			var name = '" . $this->name . "';
+
+            
 				multipleUpload = '". $this->IsMultiUpload ."';
 				token =	'".Controller::curr()->getRequest()->getSession()->get('SecurityID')."',
 				fileurl = '".$uploadURL."',
@@ -160,7 +162,8 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
 			window[name+'Dropzone'] = new Dropzone('#' + name + '-dropzone .droparea', config);
 			
 			//Show files that have already been uploaded as per the form session data i.e. during server side form error.
-			if(uploadedFiles) {
+			
+            if(uploadedFiles) {
 				$.each(uploadedFiles, function(index, value) {
 					addFileFieldID(value.ID);
 					var File = {'name': value.Name, 'size': value.Size, 'type': value.Type, 'dataURL': value.dataURL};
@@ -191,7 +194,7 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
 			}
 			
 			function addFileFieldID(ID){
-				$('.dropzone.uploadfield-holder').append('<input type=\"hidden\" name=\"' + name + '[Files][]\" value=\"' + ID + '\" />');
+				$('#' + name + '-dropzone').append('<input type=\"hidden\" name=\"' + name + '[Files][]\" value=\"' + ID + '\" />');
 			}
             
             /* Create a remove file function to allow the current uploaded files to be deleted from the temporary folder */
@@ -237,6 +240,8 @@ class UploadField extends \SilverStripe\AssetAdmin\Forms\UploadField
                             // Remove the file preview.
                             _this.removeFile(file);
 							$('.dropzone.uploadfield-holder input[value='+ fileID +']').remove();
+                            // Jochen, Fixing Counter!!!
+                            window[name+'Dropzone'].options.maxFiles = window[name+'Dropzone'].options.maxFiles + 1;
                         }
                     });
                   
